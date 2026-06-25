@@ -14,9 +14,13 @@ from app.services.matching import run_underwriting
 
 router = APIRouter(prefix="/underwriting", tags=["underwriting"])
 
-_HATCHET_ENABLED = bool(os.getenv("HATCHET_CLIENT_TOKEN"))
-if _HATCHET_ENABLED:
-    from app.tasks import underwriting_task, UnderwritingInput
+_HATCHET_ENABLED = False
+if os.getenv("HATCHET_CLIENT_TOKEN"):
+    try:
+        from app.tasks import underwriting_task, UnderwritingInput
+        _HATCHET_ENABLED = True
+    except Exception as _hatchet_err:
+        print(f"[underwriting] Hatchet init failed, running synchronously: {_hatchet_err}")
 
 
 @router.post("/{application_id}/run", response_model=UnderwritingResultsRead)
