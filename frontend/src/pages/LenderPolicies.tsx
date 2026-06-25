@@ -1,8 +1,8 @@
-// Demo start point. Show the 5 lenders loaded from the PDFs.
-// Say: "The system comes pre-loaded with all 5 lenders parsed from the provided PDFs.
-// Each lender's guidelines are stored as structured database records — click any lender
-// to see its programs and the individual criteria rows the matching engine evaluates."
-// React Query fetches this list and caches it — no manual loading state or useEffect needed.
+
+// The system comes pre-loaded with all 5 lenders parsed from the provided PDFs
+// Each lender's guidelines are stored as structured database records. Click any lender
+// to see its programs and the individual criteria rows the matching engine evaluates
+// React Query fetches this list and caches it
 
 import { useQuery } from '@tanstack/react-query'
 import { Link } from 'react-router-dom'

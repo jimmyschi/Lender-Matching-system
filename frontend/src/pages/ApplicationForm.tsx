@@ -1,12 +1,8 @@
-// Fill in: Business Name "Summit Construction LLC", State TX, Industry Construction,
-// Years in Business 4, Annual Revenue 350000, FICO 715, PayNet 662,
-// Loan Amount 45000, Term 60 months, Equipment Type Construction Equipment,
-// Equipment Age 8 years, US Citizen Yes, Homeowner No, Years at Residence 3,
-// all negative credit flags unchecked.
-// Say: "The form covers every field the matching engine uses — credit profile,
-// loan request, equipment details, and borrower flags like homeownership and
-// citizenship that specific lenders require."
-// useMutation from React Query handles the POST and navigates to the detail page on success.
+// Form for creating and editing loan applications
+// Covers every field the matching engine evaluates across all five lenders including
+// credit scores loan request equipment details and borrower flags like homeownership
+// Required number fields bind to empty string when zero so cleared inputs stay cleared
+// useMutation handles the POST or PUT and navigates to the detail page on success
 
 import { useState, useEffect } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'

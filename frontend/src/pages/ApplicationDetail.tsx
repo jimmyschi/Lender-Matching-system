@@ -1,8 +1,7 @@
-// After saving, review the application summary here, then click Run Underwriting.
-// Say: "Clicking Run Underwriting calls POST /underwriting/{id}/run. The API dispatches
-// a Hatchet task — the worker picks it up, runs the matching engine across all 5 lenders,
-// commits the results to the database, and the API returns the ranked matches."
-// The useMutation navigates to the results page as soon as the Hatchet task completes.
+// Read only view of a saved loan application with all borrower and loan fields displayed
+// The Run Underwriting button calls POST /underwriting/id/run which dispatches a Hatchet task
+// The worker evaluates the application against all lenders and commits results to the database
+// Navigation to the results page happens automatically when the task completes and the mutation resolves
 
 import { useParams, Link, useNavigate } from 'react-router-dom'
 import { useQuery, useMutation } from '@tanstack/react-query'

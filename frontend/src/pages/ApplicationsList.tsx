@@ -1,7 +1,6 @@
-// Navigate here after showing the Lender Policies page.
-// Say: "Applications are managed here. Each one tracks the borrower profile, loan
-// request, and equipment details needed to run underwriting across all lenders."
-// Click New Application to open the form and fill in the demo borrower profile.
+// List view of all loan applications with their current underwriting status
+// Each application stores the full borrower profile loan request and equipment details
+// Delete mutation removes the application and invalidates the cache to update the list
 
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
 import { Link } from 'react-router-dom'

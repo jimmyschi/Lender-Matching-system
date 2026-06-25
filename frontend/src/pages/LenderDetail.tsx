@@ -1,10 +1,7 @@
-// Open Stearns Bank. Show programs listed in priority order — Tier 1 is tried first.
-// Expand Standard Tier 1 and point to the FICO criterion row (threshold 725, weight 2.0).
-// Say: "Every rule is a row in the database. To change Stearns's FICO minimum I click
-// Edit on this one criterion and update the threshold — no code change, no redeployment."
-// Live-edit the PayNet minimum on Standard Tier 3 from 665 to 660, save, then re-run
-// underwriting on the demo application to show the result changes immediately.
-// Say: "When a lender sends a revised rate sheet, this is the entire update workflow."
+// Lender detail view displaying all programs sorted by priority with their criteria
+// Programs are evaluated in priority order and the first one where all criteria pass is the match
+// Each criterion row is editable inline so lender guidelines update without any code changes
+// Mutations call PUT on individual criteria and invalidate the lender query to refresh the view
 
 import { useState } from 'react'
 import { useParams, useNavigate, Link } from 'react-router-dom'
