@@ -25,12 +25,23 @@ source venv/bin/activate
 pip install -r requirements.txt
 
 cp .env.example .env
-# Add your ANTHROPIC_API_KEY to .env
+# Add ANTHROPIC_API_KEY and HATCHET_CLIENT_TOKEN to .env
+# Get a Hatchet token at cloud.onhatchet.run → Settings → API Tokens
 
 python ingest_lenders.py   # parses PDFs and seeds the database
 
 uvicorn app.main:app --reload
 ```
+
+In a second terminal, start the Hatchet worker:
+
+```bash
+cd backend
+source venv/bin/activate
+python worker.py
+```
+
+The worker processes underwriting jobs dispatched by the API. If `HATCHET_CLIENT_TOKEN` is not set, the API runs underwriting inline without Hatchet.
 
 The API runs at `http://localhost:8000`. Interactive docs at `http://localhost:8000/docs`.
 
