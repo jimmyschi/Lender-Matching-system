@@ -1,24 +1,18 @@
 """
-Core underwriting and lender matching engine.
+get_applicable_programs: Before evaluating any criteria, the engine filters programs
+by applicability type. If the application has a PayNet score, only with-PayNet programs
+apply. If the industry is trucking, only the trucking program applies. Irrelevant
+programs are skipped entirely.
 
-The matching process for each lender:
-  1. Build a flat dict of application fields from the ORM object.
-  2. Filter the lender's programs to those applicable for this application
-     (based on applicability_type: whether PayNet is present, whether it's
-     corp-only, trucking, medical, etc.).
-  3. Sort applicable programs by priority ascending (priority 1 = best tier).
-  4. Evaluate each program's criteria in order. Stop at the first program
-     where all hard-reject criteria pass — that's the matched program.
-  5. If no program passes, collect failure reasons from the best (lowest
-     priority) program that was attempted.
-  6. For eligible matches, compute a fit score (0-100) as a weighted average
-     of per-criterion scores. Numeric criteria (min/max) earn partial credit
-     based on margin above the threshold; boolean/list criteria are 0 or 100.
+evaluate_criterion: This function dispatches on criterion type. For min_value it checks
+the field value is at or above the threshold. For excluded_values it checks the field is
+not in the restricted list. This is the only function you would touch to add a new rule
+type — one elif branch, and it works across every lender.
 
-Extending the engine:
-  - New criterion type: add an elif branch in evaluate_criterion().
-  - New applicability type: add an elif branch in get_applicable_programs().
-  - New lender: insert rows into the database—no code change required.
+Fit score: Passing a criterion is not binary in the score — a borrower who barely meets
+a threshold scores close to 50, one who clears it comfortably scores toward 100. This
+means the ranked list actually reflects how well matched each lender is, not just who
+is eligible.
 """
 from app.models import LoanApplication, Lender, LenderProgram, LenderCriterion
 

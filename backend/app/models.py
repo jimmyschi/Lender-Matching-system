@@ -1,18 +1,10 @@
 """
-ORM models for the lender matching platform.
+Every lending rule is a database row, not a line of code. That design is what
+makes the whole system extensible without redeployment.
 
-Schema design centers on three tiers: Lenders own Programs, Programs own Criteria.
-This three-level structure lets you add a new lender by inserting rows—no code
-change needed. Adding a new criterion type requires only a new branch in
-matching.py's evaluate_criterion function.
-
-LoanApplication captures everything needed to run underwriting. Fields like
-years_since_bankruptcy and num_trucks_operating are nullable; the matching
-engine treats null as "not applicable" when null_means_pass is set on a
-criterion, or as a hard fail otherwise.
-
-MatchResult stores the outcome per lender per application run. criterion_results
-is a JSON snapshot of the evaluation so the UI can display per-criterion
+After underwriting runs, each lender gets a MatchResult row. The criterion_results
+column stores a JSON snapshot of every individual pass and fail — that's how the
+UI can render the per-criterion table instantly on reload without re-running the engine.
 pass/fail without re-running the engine.
 """
 from datetime import datetime

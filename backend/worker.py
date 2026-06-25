@@ -1,11 +1,7 @@
 """
-Hatchet worker process. Run this alongside the API server to process
-underwriting tasks in the background:
-
-    source venv/bin/activate
-    python worker.py
-
-Requires HATCHET_CLIENT_TOKEN in backend/.env.
+This is the worker process. It registers the task with Hatchet and listens for jobs.
+It runs separately from the API — you would see python worker.py running in a second
+terminal alongside uvicorn.
 """
 from app.tasks import hatchet, underwriting_task
 

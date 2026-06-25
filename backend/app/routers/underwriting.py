@@ -1,6 +1,8 @@
 """
-Underwriting endpoints. Dispatches work to a Hatchet background task when
-HATCHET_CLIENT_TOKEN is configured; otherwise runs inline (synchronous fallback).
+The router checks for the Hatchet token at startup. When it is present, dispatching
+an underwriting job means calling underwriting_task.run() — one line — which sends
+the work to the queue and blocks until the worker finishes. If Hatchet is not
+configured, it falls back to synchronous execution so the system works in both modes.
 """
 import os
 

@@ -1,12 +1,16 @@
 """
-Reads each lender PDF, extracts text with pdfplumber, sends it to the Anthropic
-API with a structured schema prompt, and inserts the returned JSON into the database.
+Rather than hardcoding lender guidelines, this script reads each PDF with pdfplumber
+to extract text, then sends it to the Anthropic API with a structured prompt that maps
+free-form PDF language to the database schema — field names, criterion types, program
+tiers, thresholds. The output is JSON that the script inserts directly into the database.
+
+The prompt teaches the model what field names like guarantor_fico and criterion types
+like min_value mean. Every lender lands in the database through the same pipeline, so
+adding a sixth lender means uploading a PDF and running this script — no schema changes,
+no code changes.
 
 Run once after creating the database tables:
     python ingest_lenders.py
-
-Requires ANTHROPIC_API_KEY in backend/.env. Clears existing lender data before
-inserting so the script is safe to re-run.
 """
 import json
 import sys

@@ -1,14 +1,7 @@
 """
-Hatchet background tasks for the underwriting pipeline.
-
-The underwriting_task is dispatched from POST /underwriting/{id}/run and executed
-by the worker process (worker.py). Separating the matching logic into a Hatchet
-task means the API tier is decoupled from the compute tier — multiple requests can
-be queued and processed concurrently, retried automatically on failure, and observed
-in the Hatchet Cloud dashboard.
-
-The task opens its own database session because it runs in a separate process from
-the API. Any data committed here is visible to the API's session on the next query.
+This is the Hatchet task definition. The @hatchet.task decorator registers this
+function as a named workflow step. It takes the application ID as input, opens its
+own database session, runs the matching engine, saves results, and returns.
 """
 from pydantic import BaseModel
 from hatchet_sdk import Hatchet
