@@ -20,8 +20,6 @@ All five lenders' core credit criteria are implemented: FICO minimums, PayNet mi
 
 **Comparable debt / trade line checks are not modeled.** Stearns requires comparable business borrowing (open/closed account equal to or exceeding the requested amount or 3+ $10K contracts in last 12 months). Apex requires 50% revolving available and comparable borrowing at higher amounts. These require detailed tradeline data that a real system would pull from a credit bureau. They are described in lender descriptions but not enforced as criteria.
 
-**No Hatchet workflow orchestration.** The spec marks this as optional and describes it as good to have. Underwriting runs synchronously within the FastAPI request. For the volume of a demo system this is fine. A production system handling concurrent submissions would benefit from a task queue.
-
 **No PDF parsing pipeline.** The add-new-lender workflow is handled via the UI (manual data entry). The alternative — upload a PDF, extract text with pdfplumber, parse with an LLM — is a clean extension point but adds scope. A user adding a lender today navigates to Lender Policies, clicks Add Lender, creates programs, and adds criteria using the form. This maps directly to the structure of the PDFs.
 
 **Advantage+ startup FICO (700) vs standard FICO (680) is not split into two programs.** The standard program uses 680, which is the non-startup floor. A startup applicant who meets 680 but not 700 will show as eligible at 680 but the lender description notes the higher requirement. This was simplified to avoid a separate startup program that adds UI complexity without much demo value.
@@ -35,8 +33,6 @@ All five lenders' core credit criteria are implemented: FICO minimums, PayNet mi
 **Multi-bureau credit score capture.** Separate fields for TransUnion, Equifax FICO v5, and Experian, with each lender's criteria mapping to the appropriate bureau.
 
 **Comparable debt criteria.** A structured tradeline input (list of existing accounts with balance, type, payment status, age) would enable Stearns and Apex's comp-debt checks.
-
-**Hatchet for parallel underwriting.** Evaluate all lenders in parallel with retry logic, then aggregate results. For five lenders the difference is negligible; for 50+ it matters.
 
 **Audit trail.** Track which criteria or program thresholds changed and when, so results from a prior underwriting run remain reproducible even after a lender updates their guidelines.
 
