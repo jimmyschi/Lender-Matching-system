@@ -25,8 +25,9 @@ source venv/bin/activate
 pip install -r requirements.txt
 
 cp .env.example .env
+# Add your ANTHROPIC_API_KEY to .env
 
-python seed_data.py
+python ingest_lenders.py   # parses PDFs and seeds the database
 
 uvicorn app.main:app --reload
 ```
