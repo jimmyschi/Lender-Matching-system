@@ -154,7 +154,7 @@ export default function ApplicationForm() {
             </Select>
           </Field>
           <Field label="Years in Business">
-            <Input type="number" min="0" step="0.5" required value={form.years_in_business}
+            <Input type="number" min="0" step="0.5" required value={form.years_in_business || ''}
               onChange={e => set('years_in_business', Number(e.target.value))} />
           </Field>
           <Field label="Annual Revenue ($)" hint="Optional — required for some corp-only programs">
@@ -168,7 +168,7 @@ export default function ApplicationForm() {
 
         <Section title="Credit Profile">
           <Field label="Guarantor FICO Score" hint="Use TransUnion score for Citizens Bank applications">
-            <Input type="number" min="300" max="850" required value={form.guarantor_fico}
+            <Input type="number" min="300" max="850" required value={form.guarantor_fico || ''}
               onChange={e => set('guarantor_fico', Number(e.target.value))} />
           </Field>
           <Field label="PayNet Score" hint="Leave blank if not available">
@@ -206,7 +206,7 @@ export default function ApplicationForm() {
 
         <Section title="Loan Request">
           <Field label="Loan Amount ($)">
-            <Input type="number" min="0" required value={form.loan_amount}
+            <Input type="number" min="0" required value={form.loan_amount || ''}
               onChange={e => set('loan_amount', Number(e.target.value))} />
           </Field>
           <Field label="Loan Term (months)">
