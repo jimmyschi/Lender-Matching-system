@@ -1,3 +1,13 @@
+// Fill in: Business Name "Summit Construction LLC", State TX, Industry Construction,
+// Years in Business 4, Annual Revenue 350000, FICO 715, PayNet 662,
+// Loan Amount 45000, Term 60 months, Equipment Type Construction Equipment,
+// Equipment Age 8 years, US Citizen Yes, Homeowner No, Years at Residence 3,
+// all negative credit flags unchecked.
+// Say: "The form covers every field the matching engine uses — credit profile,
+// loan request, equipment details, and borrower flags like homeownership and
+// citizenship that specific lenders require."
+// useMutation from React Query handles the POST and navigates to the detail page on success.
+
 import { useState, useEffect } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'

@@ -1,3 +1,16 @@
+// Walk results top to bottom — eligible lenders ranked by fit score, then ineligible.
+// Expand Stearns Bank (rejected): "Stearns has a three-tier PayNet waterfall. This
+// applicant has PayNet 662 — 3 points below the lowest tier's 665 minimum. Every tier failed."
+// Expand Citizens Bank (rejected): "Single reason: homeownership required. The Non-Homeowner
+// program needs 5 years at the same address — this applicant has 3. Tier 3 starts at a
+// $75K minimum loan — this applicant requested $45K. Every pathway closes."
+// Expand Falcon Equipment Finance (eligible): point to the PayNet criterion score.
+// Say: "PayNet 662 clears Falcon's 660 minimum by 2 points. The fit score on that
+// criterion is near the floor — the margin scoring makes the near-miss visible."
+// Expand Apex Commercial Capital (eligible): Say: "A+ required FICO 720 and 5 years TIB.
+// Standard A required TIB 5. Standard B requires FICO 670 and TIB 3 — both pass.
+// The engine placed the applicant at B rate automatically."
+
 import { useState } from 'react'
 import { useParams, Link } from 'react-router-dom'
 import { useQuery } from '@tanstack/react-query'

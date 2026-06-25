@@ -1,3 +1,8 @@
+// Navigate here after showing the Lender Policies page.
+// Say: "Applications are managed here. Each one tracks the borrower profile, loan
+// request, and equipment details needed to run underwriting across all lenders."
+// Click New Application to open the form and fill in the demo borrower profile.
+
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
 import { Link } from 'react-router-dom'
 import { applicationsApi } from '../api/client'

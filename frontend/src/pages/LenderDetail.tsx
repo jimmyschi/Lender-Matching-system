@@ -1,3 +1,11 @@
+// Open Stearns Bank. Show programs listed in priority order — Tier 1 is tried first.
+// Expand Standard Tier 1 and point to the FICO criterion row (threshold 725, weight 2.0).
+// Say: "Every rule is a row in the database. To change Stearns's FICO minimum I click
+// Edit on this one criterion and update the threshold — no code change, no redeployment."
+// Live-edit the PayNet minimum on Standard Tier 3 from 665 to 660, save, then re-run
+// underwriting on the demo application to show the result changes immediately.
+// Say: "When a lender sends a revised rate sheet, this is the entire update workflow."
+
 import { useState } from 'react'
 import { useParams, useNavigate, Link } from 'react-router-dom'
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
