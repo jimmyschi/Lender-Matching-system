@@ -20,15 +20,11 @@ All five lenders' core credit criteria are implemented: FICO minimums, PayNet mi
 
 **Comparable debt / trade line checks are not modeled.** Stearns requires comparable business borrowing (open/closed account equal to or exceeding the requested amount or 3+ $10K contracts in last 12 months). Apex requires 50% revolving available and comparable borrowing at higher amounts. These require detailed tradeline data that a real system would pull from a credit bureau. They are described in lender descriptions but not enforced as criteria.
 
-**No PDF parsing pipeline.** The add-new-lender workflow is handled via the UI (manual data entry). The alternative — upload a PDF, extract text with pdfplumber, parse with an LLM — is a clean extension point but adds scope. A user adding a lender today navigates to Lender Policies, clicks Add Lender, creates programs, and adds criteria using the form. This maps directly to the structure of the PDFs.
-
 **Advantage+ startup FICO (700) vs standard FICO (680) is not split into two programs.** The standard program uses 680, which is the non-startup floor. A startup applicant who meets 680 but not 700 will show as eligible at 680 but the lender description notes the higher requirement. This was simplified to avoid a separate startup program that adds UI complexity without much demo value.
 
 **Citizens Bank CDL and fleet requirements for the startup program** are noted in the program description but not modeled as hard-reject criteria because verifying "Class A CDL for 5 years" requires additional time-series data the application form does not capture.
 
 ## What Would Be Added With More Time
-
-**PDF ingestion pipeline.** Upload a PDF -> pdfplumber extracts text -> Claude API returns structured JSON (lender name, programs, criteria with types and thresholds) -> user reviews and saves. This would make the "add new lender" workflow much faster and less error-prone.
 
 **Multi-bureau credit score capture.** Separate fields for TransUnion, Equifax FICO v5, and Experian, with each lender's criteria mapping to the appropriate bureau.
 
